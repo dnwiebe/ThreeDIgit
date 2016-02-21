@@ -22,9 +22,9 @@ void setup() {
   upButton.setup ();
   downButton.setup ();
 
-  for (byte i = 0; i < 3; i++) {
-    display.post ();
-  }
+  display.post ();
+  display.post ();
+  display.post ();
 }
 
 void loop() {
