@@ -1,71 +1,37 @@
 #include <Arduino.h>
 #include "Display.h"
 
-#define D0UL 0x000001L
-#define D0TP 0x000002L
-#define D0UR 0x000004L
-#define D0LL 0x000008L
-#define D0CT 0x000010L
-#define D0LR 0x000020L
-#define D0BT 0x000040L
+#define UL 0x01
+#define TP 0x02
+#define UR 0x04
+#define LL 0x08
+#define CT 0x10
+#define LR 0x20
+#define BT 0x40
 
-#define D1UL 0x000080L
-#define D1TP 0x000100L
-#define D1UR 0x000200L
-#define D1LL 0x000400L
-#define D1CT 0x000800L
-#define D1LR 0x001000L
-#define D1BT 0x002000L
+#define SEG(D, S) (S << (8 * D))
 
-#define D2UL 0x004000L
-#define D2TP 0x008000L
-#define D2UR 0x010000L
-#define D2LL 0x020000L
-#define D2CT 0x040000L
-#define D2LR 0x080000L
-#define D2BT 0x100000L
+#define V0 (UL | TP | UR | LL      | LR | BT)
+#define V1 (          UR           | LR     )
+#define V2 (     TP | UR | LL | CT      | BT)
+#define V3 (     TP | UR      | CT | LR | BT)
+#define V4 (UL      | UR      | CT | LR     )
+#define V5 (UL | TP           | CT | LR | BT)
+#define V6 (UL | TP      | LL | CT | LR | BT)
+#define V7 (     TP | UR           | LR     )
+#define V8 (UL | TP | UR | LL | CT | LL | BT)
+#define V9 (UL | TP | UR | LL | CT      | BT)
 
-#define D0_0 D0UL | D0TP | D0UR | D0LL        | D0LR | D0BT
-#define D0_1               D0UR               | D0LR
-#define D0_2        D0TP | D0UR | D0LL | D0CT        | D0BT
-#define D0_3        D0TP | D0UR        | D0CT | D0LR | D0BT
-#define D0_4 D0UL        | D0UR        | D0CT | D0LR
-#define D0_5        D0TP | D0UR        | D0CT | D0LR | D0BT
-#define D0_6        D0TP | D0UR | D0LL | D0CT | D0LR | D0BT
-#define D0_7        D0TP | D0UR               | D0LR
-#define D0_8 D0UL | D0TP | D0UR | D0LL | D0CT | D0LL | D0BT
-#define D0_9 D0UL | D0TP | D0UR | D0LL | D0CT        | D0BT
+#define DIG(D, N) (V##N << (8 * D))
 
-#define D1_0 D1UL | D1TP | D1UR | D1LL        | D1LR | D1BT
-#define D1_1               D1UR               | D1LR
-#define D1_2        D1TP | D1UR | D1LL | D1CT        | D1BT
-#define D1_3        D1TP | D1UR        | D1CT | D1LR | D1BT
-#define D1_4 D1UL        | D1UR        | D1CT | D1LR
-#define D1_5        D1TP | D1UR        | D1CT | D1LR | D1BT
-#define D1_6        D1TP | D1UR | D1LL | D1CT | D1LR | D1BT
-#define D1_7        D1TP | D1UR               | D1LR
-#define D1_8 D1UL | D1TP | D1UR | D1LL | D1CT | D1LL | D1BT
-#define D1_9 D1UL | D1TP | D1UR | D1LL | D1CT        | D1BT
-
-#define D2_0 D2UL | D2TP | D2UR | D2LL        | D2LR | D2BT
-#define D2_1               D2UR               | D2LR
-#define D2_2        D2TP | D2UR | D2LL | D2CT        | D2BT
-#define D2_3        D2TP | D2UR        | D2CT | D2LR | D2BT
-#define D2_4 D2UL        | D2UR        | D2CT | D2LR
-#define D2_5        D2TP | D2UR        | D2CT | D2LR | D2BT
-#define D2_6        D2TP | D2UR | D2LL | D2CT | D2LR | D2BT
-#define D2_7        D2TP | D2UR               | D2LR
-#define D2_8 D2UL | D2TP | D2UR | D2LL | D2CT | D2LL | D2BT
-#define D2_9 D2UL | D2TP | D2UR | D2LL | D2CT        | D2BT
-
-const unsigned long D0[] = {D0_0, D0_1, D0_2, D0_3, D0_4, D0_5, D0_6, D0_7, D0_8, D0_9};
-const unsigned long D1[] = {D1_0, D1_1, D1_2, D1_3, D1_4, D1_5, D1_6, D1_7, D1_8, D1_9};
-const unsigned long D2[] = {D2_0, D2_1, D2_2, D2_3, D2_4, D2_5, D2_6, D2_7, D2_8, D2_9};
+const uint32_t D0[] = {DIG(0,0), DIG(0,1), DIG(0,2), DIG(0,3), DIG(0,4), DIG(0,5), DIG(0,6), DIG(0,7), DIG(0,8), DIG(0,9)};
+const uint32_t D1[] = {DIG(1,0), DIG(1,1), DIG(1,2), DIG(1,3), DIG(1,4), DIG(1,5), DIG(1,6), DIG(1,7), DIG(1,8), DIG(1,9)};
+const uint32_t D2[] = {DIG(2,0), DIG(2,1), DIG(2,2), DIG(2,3), DIG(2,4), DIG(2,5), DIG(2,6), DIG(2,7), DIG(2,8), DIG(2,9)};
 
 const uint32_t POST_SEQUENCE[] = {
-  D0UL, D0TP, D0UR, D0CT, D0LL, D0BT, D0LR,
-  D1UL, D1TP, D1UR, D1CT, D1LL, D1BT, D1LR,
-  D2UL, D2TP, D2UR, D2CT, D2LL, D2BT, D2LR
+  SEG(0,UL), SEG(0,TP), SEG(0,UR), SEG(0,CT), SEG(0,LL), SEG(0,BT), SEG(0,LR),
+  SEG(1,UL), SEG(1,TP), SEG(1,UR), SEG(1,CT), SEG(1,LL), SEG(1,BT), SEG(1,LR),
+  SEG(2,UL), SEG(2,TP), SEG(2,UR), SEG(2,CT), SEG(2,LL), SEG(2,BT), SEG(2,LR),
 };
 
 Display::Display (byte latchPin, byte clockPin, byte dataPin, const NumberKeeper& keeper):
@@ -80,7 +46,7 @@ void displayFrame (uint32_t pattern, byte latchPin, byte clockPin, byte dataPin)
   digitalWrite (latchPin, LOW);
   digitalWrite (clockPin, LOW);
   digitalWrite (dataPin, LOW);
-  for (byte i = 0; i < 21; i++) {
+  for (byte i = 0; i < 24; i++) {
     boolean active = (pattern & 1) != 0;
     pattern >>= 1;
     digitalWrite (dataPin, active ? HIGH : LOW);
