@@ -6,7 +6,8 @@ private:
   signed int number;
   unsigned long prevNow;
   unsigned long millisecondsRemainingInDay;
-  
+  bool savePending;
+  unsigned long millisecondsUntilSave;  
   
 public:
   NumberKeeper ();

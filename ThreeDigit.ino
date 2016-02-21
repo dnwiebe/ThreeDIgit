@@ -1,3 +1,4 @@
+#include <EEPROM.h>
 #include "NumberKeeper.h"
 #include "Display.h"
 #include "Debounce.h"
