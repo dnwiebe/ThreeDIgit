@@ -25,38 +25,38 @@
 #define D2LR 0x080000L
 #define D2BT 0x100000L
 
-#define D0_0 D0UL | D0TP | D0UR | D0LL | D0LR | D0BT
-#define D0_1 D0UR | D0LR
-#define D0_2 D0TP | D0UR | D0CT | D0LL | D0BT
-#define D0_3 D0TP | D0UR | D0CT | D0LR | D0BT
-#define D0_4 D0UL | D0UR | D0CT | D0LR
-#define D0_5 D0UR | D0TP | D0CT | D0LR | D0BT
-#define D0_6 D0UR | D0TP | D0CT | D0LL | D0LR | D0BT
-#define D0_7 D0TP | D0UR | D0LR
-#define D0_8 D0UR | D0TP | D0UL | D0LL | D0CT | D0LL | D0BT
-#define D0_9 D0UR | D0TP | D0UL | D0CT | D0LL | D0BT
+#define D0_0 D0UL | D0TP | D0UR | D0LL        | D0LR | D0BT
+#define D0_1               D0UR               | D0LR
+#define D0_2        D0TP | D0UR | D0LL | D0CT        | D0BT
+#define D0_3        D0TP | D0UR        | D0CT | D0LR | D0BT
+#define D0_4 D0UL        | D0UR        | D0CT | D0LR
+#define D0_5        D0TP | D0UR        | D0CT | D0LR | D0BT
+#define D0_6        D0TP | D0UR | D0LL | D0CT | D0LR | D0BT
+#define D0_7        D0TP | D0UR               | D0LR
+#define D0_8 D0UL | D0TP | D0UR | D0LL | D0CT | D0LL | D0BT
+#define D0_9 D0UL | D0TP | D0UR | D0LL | D0CT        | D0BT
 
-#define D1_0 D1UL | D1TP | D1UR | D1LL | D1LR | D1BT
-#define D1_1 D1UR | D1LR
-#define D1_2 D1TP | D1UR | D1CT | D1LL | D1BT
-#define D1_3 D1TP | D1UR | D1CT | D1LR | D1BT
-#define D1_4 D1UL | D1UR | D1CT | D1LR
-#define D1_5 D1UR | D1TP | D1CT | D1LR | D1BT
-#define D1_6 D1UR | D1TP | D1CT | D1LL | D1LR | D1BT
-#define D1_7 D1TP | D1UR | D1LR
-#define D1_8 D1UR | D1TP | D1UL | D1LL | D1CT | D1LL | D1BT
-#define D1_9 D1UR | D1TP | D1UL | D1CT | D1LL | D1BT
+#define D1_0 D1UL | D1TP | D1UR | D1LL        | D1LR | D1BT
+#define D1_1               D1UR               | D1LR
+#define D1_2        D1TP | D1UR | D1LL | D1CT        | D1BT
+#define D1_3        D1TP | D1UR        | D1CT | D1LR | D1BT
+#define D1_4 D1UL        | D1UR        | D1CT | D1LR
+#define D1_5        D1TP | D1UR        | D1CT | D1LR | D1BT
+#define D1_6        D1TP | D1UR | D1LL | D1CT | D1LR | D1BT
+#define D1_7        D1TP | D1UR               | D1LR
+#define D1_8 D1UL | D1TP | D1UR | D1LL | D1CT | D1LL | D1BT
+#define D1_9 D1UL | D1TP | D1UR | D1LL | D1CT        | D1BT
 
-#define D2_0 D2UL | D2TP | D2UR | D2LL | D2LR | D2BT
-#define D2_1 D2UR | D2LR
-#define D2_2 D2TP | D2UR | D2CT | D2LL | D2BT
-#define D2_3 D2TP | D2UR | D2CT | D2LR | D2BT
-#define D2_4 D2UL | D2UR | D2CT | D2LR
-#define D2_5 D2UR | D2TP | D2CT | D2LR | D2BT
-#define D2_6 D2UR | D2TP | D2CT | D2LL | D2LR | D2BT
-#define D2_7 D2TP | D2UR | D2LR
-#define D2_8 D2UR | D2TP | D2UL | D2LL | D2CT | D2LL | D2BT
-#define D2_9 D2UR | D2TP | D2UL | D2CT | D2LL | D2BT
+#define D2_0 D2UL | D2TP | D2UR | D2LL        | D2LR | D2BT
+#define D2_1               D2UR               | D2LR
+#define D2_2        D2TP | D2UR | D2LL | D2CT        | D2BT
+#define D2_3        D2TP | D2UR        | D2CT | D2LR | D2BT
+#define D2_4 D2UL        | D2UR        | D2CT | D2LR
+#define D2_5        D2TP | D2UR        | D2CT | D2LR | D2BT
+#define D2_6        D2TP | D2UR | D2LL | D2CT | D2LR | D2BT
+#define D2_7        D2TP | D2UR               | D2LR
+#define D2_8 D2UL | D2TP | D2UR | D2LL | D2CT | D2LL | D2BT
+#define D2_9 D2UL | D2TP | D2UR | D2LL | D2CT        | D2BT
 
 const unsigned long D0[] = {D0_0, D0_1, D0_2, D0_3, D0_4, D0_5, D0_6, D0_7, D0_8, D0_9};
 const unsigned long D1[] = {D1_0, D1_1, D1_2, D1_3, D1_4, D1_5, D1_6, D1_7, D1_8, D1_9};
@@ -76,20 +76,20 @@ Display::Display (byte latchPin, byte clockPin, byte dataPin, const NumberKeeper
   this->dataPin = dataPin;
 }
 
-void displayFrame (uint32_t pattern, byte latch, byte clock, byte data) {
-  digitalWrite (latch, LOW);
-  digitalWrite (clock, LOW);
-  digitalWrite (data, LOW);
+void displayFrame (uint32_t pattern, byte latchPin, byte clockPin, byte dataPin) {
+  digitalWrite (latchPin, LOW);
+  digitalWrite (clockPin, LOW);
+  digitalWrite (dataPin, LOW);
   for (byte i = 0; i < 21; i++) {
     boolean active = (pattern & 1) != 0;
     pattern >>= 1;
-    digitalWrite (data, active ? HIGH : LOW);
-    digitalWrite (clock, HIGH);
+    digitalWrite (dataPin, active ? HIGH : LOW);
+    digitalWrite (clockPin, HIGH);
     delayMicroseconds (1);
-    digitalWrite (clock, LOW);
+    digitalWrite (clockPin, LOW);
   }
-  digitalWrite (latch, HIGH);
-  digitalWrite (data, LOW);
+  digitalWrite (latchPin, HIGH);
+  digitalWrite (dataPin, LOW);
 }
 
 void Display::setup() {

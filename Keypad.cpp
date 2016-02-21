@@ -16,6 +16,7 @@ bool wasJustPressed (const Debounce& button, bool &prevState) {
 }
 
 void handlePress (bool justPressed, const Debounce& otherButton, NumberKeeper& keeper, int delta) {
+  if (!justPressed) {return;}
   if (otherButton.isDown ()) {
     keeper.increaseBy (0 - keeper.value ());
   }
@@ -25,10 +26,7 @@ void handlePress (bool justPressed, const Debounce& otherButton, NumberKeeper& k
 }
 
 void Keypad::update (unsigned long now) {
-  bool upPressed = wasJustPressed (upButton, upWasDown);
-  bool downPressed = wasJustPressed (downButton, downWasDown);
-  if (!upPressed && !downPressed) {return;}
-  handlePress (upPressed, downButton, keeper, 1);
-  handlePress (downPressed, upButton, keeper, -1);
+  handlePress (wasJustPressed (upButton, upWasDown), downButton, keeper, 1);
+  handlePress (wasJustPressed (downButton, downWasDown), upButton, keeper, -1);
 }
 
